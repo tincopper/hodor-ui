@@ -13,10 +13,11 @@
   }
 
   .logo {
-    padding: 60px;
-    width: 320px;
+    padding: 65px;
+    width: 164px;
     background-image:url('../images/logo.png');
-    background-color: #cccccc;
+    background-color: #ffffff;
+    background-repeat:no-repeat;
   }
 
   .form {

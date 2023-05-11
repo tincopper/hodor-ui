@@ -71,6 +71,7 @@ export default {
       apiFn()(loginApi, "login", param, this).then(res => {
         this.$router.replace("/");
         session("activeIndex", "0_0");
+        session("userInfo", res.data.data);
         // if (res && res.successful) {
         //   this.$router.replace("/");
         //   session("userInfo", res.data);

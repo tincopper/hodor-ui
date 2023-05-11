@@ -135,7 +135,7 @@ export default {
       this.dialogTableVisible = false;
 
       if (val) {
-        apiFn()(jobgroupApi, "add", val, this).then(res => {
+        apiFn()(jobgroupApi, "create", val, this).then(res => {
           if (res.successful) {
             successMsg("任务组 " + val.groupName + " 新增成功", this);
             this.init();
@@ -144,7 +144,7 @@ export default {
       }
     },
     remove(rows) {
-      apiFn()(jobgroupApi, "remove", { groupName: rows.groupName }, this).then(
+      apiFn()(jobgroupApi, "delete", { groupName: rows.groupName }, this).then(
         res => {
           if (res.successful) {
             successMsg("删除成功", this);

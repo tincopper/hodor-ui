@@ -319,7 +319,7 @@ export const apiFn = function() {
           return res.data
         } else {
           res.data.msg ? that.$message.error(res.data.msg) : ''
-          if (res.data.msg == '登陆已失效') {
+          if (res.data.code == 10006) {
             that.$router.replace('/login')
           }
           return res.data

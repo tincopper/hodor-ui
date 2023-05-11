@@ -1,10 +1,10 @@
 import instance from "./index"
-const preUrlPath = "/app/service"
+const preUrlPath = "/app/group"
 
 const jobgroupApi = {
   init: {
     r: params => {
-      return instance.post(`${preUrlPath}/job/group/listPage`,
+      return instance.get(`${preUrlPath}/listPage`,
         params
       )
 
@@ -12,7 +12,7 @@ const jobgroupApi = {
   },
   search: {
     r: params => {
-      return instance.post(`${preUrlPath}/selectByKey`,
+      return instance.get(`${preUrlPath}/selectByKey`,
         params
       )
 
@@ -20,15 +20,15 @@ const jobgroupApi = {
   },
   add: {
     r: params => {
-      return instance.post(`${preUrlPath}/job/group/add`,
+      return instance.post(`${preUrlPath}/create`,
         params
       )
 
     }
   },
-  remove: {
+  delete: {
     r: params => {
-      return instance.post(`${preUrlPath}/job/group/delete`,
+      return instance.post(`${preUrlPath}/delete`,
         params
       )
 

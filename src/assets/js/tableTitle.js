@@ -32,8 +32,16 @@ export const jobGroup = [{
     val: 'groupName',
   },
   {
+    label: '创建人',
+    val: 'createUser',
+  },
+  {
     label: '备注',
     val: 'remark',
+  },
+  {
+    label: '创建时间',
+    val: 'createAt',
   },
 ]
 export const jobStatus = [{
