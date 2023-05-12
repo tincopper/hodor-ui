@@ -6,8 +6,8 @@
     </div>
     <div @keyup.enter="onSubmit">
       <el-form class="form" :model="form">
-        <el-form-item prop="name">
-          <el-input placeholder="用户名" :autofocus="true" prefix-icon="el-icon-edit" v-model="form.name">
+        <el-form-item prop="username">
+          <el-input placeholder="用户名" :autofocus="true" prefix-icon="el-icon-edit" v-model="form.username">
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -28,7 +28,7 @@ import "../assets/sass/common.css";
 import "../assets/sass/login.css";
 import { apiFn, session } from "../assets/util.js";
 import * as loginApi from "../api/login.js";
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, getCurrentInstance } from "vue";
 import { useRouter } from 'vue-router'
 const myMixin = {
   data: function () {
@@ -41,15 +41,16 @@ export default defineComponent({
   mixins: [myMixin],
   setup () {
     const router = useRouter();
+    const { proxy } = getCurrentInstance();
 
     const form = reactive({
       username: '',
       password: '',
     });
 
-    const checkFrom = () => {
-      if (form.name == "") {
-        this.$message({
+    const checkForm = () => {
+      if (form.username == "") {
+        proxy.$message({
           title: "提示",
           message: "请输入用户名！",
           type: "warning",
@@ -58,7 +59,7 @@ export default defineComponent({
         return false;
       }
       if (form.password == "") {
-        this.$message({
+        proxy.$message({
           title: "提示",
           message: "请输入密码！",
           type: "warning",
@@ -70,15 +71,15 @@ export default defineComponent({
     }
 
     const onSubmit = () => {
-
-      if (!this.checkForm()) {
+      console.log('-------')
+      if (!checkForm()) {
         return;
       }
       let param = {
-        username: this.form.name.trim(),
-        password: this.form.password.trim()
+        username: form.username.trim(),
+        password: form.password.trim()
       };
-      apiFn()(loginApi, "login", param, this).then(res => {
+      apiFn()(loginApi, "login", param, proxy).then(res => {
         router.replace("/");
         session("activeIndex", "0_0");
         // if (res && res.successful) {
@@ -90,7 +91,7 @@ export default defineComponent({
     }
     return {
       form,
-      checkFrom,
+      checkForm,
       onSubmit
     }
   }

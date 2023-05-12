@@ -84,7 +84,6 @@ export default defineComponent({
     asideMenu
   },
   setup () {
-    const route = useRoute();
     const router = useRouter();
     const menuRef = reactive({
       menu: []

@@ -1,4 +1,6 @@
 import initLoading from '@/utils/loading'
+import router from '@/router/index'
+import { ElMessage } from 'element-plus'
 
 //sessionStorage
 export const session = function (key, value) {
@@ -139,31 +141,31 @@ export const catchError = function (error) {
   if (error.response) {
     switch (error.response.status) {
       case 400:
-        Vue.prototype.$message({
+        ElMessage({
           message: error.response.data.message || '请求参数异常',
           type: 'error',
         })
         break
       case 401:
         sessionStorage.removeItem('user')
-        Vue.prototype.$message({
+        ElMessage({
           message: error.response.data.message || '密码错误或账号不存在！',
           type: 'warning',
-          onClose: function () {
+          close: function () {
             location.reload()
           },
         })
         break
       case 403:
         // window.location.href = 'http://user.gw-ec.com/login/index/login/'
-        Vue.prototype.$message({
+        ElMessage({
           message:
             error.response.data.message || '无访问权限，请联系企业管理员',
           type: 'warning',
         })
         break
       default:
-        Vue.prototype.$message({
+        ElMessage({
           message: error.response.data.message || '服务端异常，请联系技术支持',
           type: 'error',
         })
@@ -316,7 +318,7 @@ export const apiFn = function () {
         } else {
           res.data.msg ? that.$message.error(res.data.msg) : ''
           if (res.data.msg == '登陆已失效') {
-            that.$router.replace('/login')
+            router.replace('/login')
           }
           return res.data
         }
