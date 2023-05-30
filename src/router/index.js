@@ -32,7 +32,7 @@ const router = createRouter({
         {
           path: '/service',
           name: 'service',
-          component: (resolve) => require(['@/components/Service'], resolve),
+          component: () => import('@/components/Service'),
         },
         {
           path: '/jobgroup',

@@ -17,4 +17,13 @@ module.exports = {
       }),
     ],
   },
+  devServer: {
+    proxy: {
+      '/hodor': {
+        target: 'http://106.55.104.216:8088',
+        ws: true,
+        changeOrigin: true,
+      },
+    },
+  },
 }

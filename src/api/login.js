@@ -1,23 +1,17 @@
-import instance from "./index"
-
-const preUrlPath = "app"
+import instance from './index'
 
 //登录
 const login = {
-  r: params => {
-    return instance.post(`${preUrlPath}/login`, params)
+  r: (params) => {
+    return instance.post('/app/login', params)
   },
 }
 
 //退出
 const logOut = {
-  r: params => {
-    return instance.post(`${preUrlPath}/logout`, params)
-
-    }
+  r: (params) => {
+    return instance.post('logout', params)
+  },
 }
 
-export {
-  login,
-  logOut,
-}
+export { login, logOut }

@@ -2,7 +2,7 @@
   <el-container class="home-container ">
     <el-aside class="home-aside-content">
       <el-scrollbar class="menu-scrollbar">
-        <el-menu :default-active="defaultActive" :default-openeds="open_list" router ref="navMenu" unique-opened :collapse="isCollapse" class="el-menu-vertical-in-home">
+        <el-menu :default-active="defaultActive" :default-openeds="open_list" router ref="navMenu" unique-opened :collapse="isCollapse" class="el-menu-vertical-demo">
           <el-menu-item index='0_0' route='/' class="gohome">
             <i class="el-icon-ump-home home"></i>
             <span class="logo-section">
@@ -26,7 +26,7 @@
               </el-sub-menu>
             </template>
             <template v-else>
-              <el-menu-item @click="clickMenu" :route="route.router" :index="route.index+''">
+              <el-menu-item @click="clickMenu" :route="route.router" :index="route.index+''" :key="index">
                 <i :class="route.icon"></i>
                 <template v-slot:title>
                   <span>{{route.name}} </span>
@@ -64,9 +64,9 @@ import "@/assets/fonts/icon/style.css";
 import "@/assets/css/reset.css";
 import "@/assets/sass/common.css";
 import "@/assets/sass/index.css";
+import * as loginApi from "../api/login.js";
 import * as asideMenu from "../assets/js/menu.js";
 import { apiFn, session } from "../assets/util.js";
-import * as loginApi from "../api/login.js";
 import { defineComponent, onMounted, reactive, ref, toRefs, onUpdated } from "vue";
 import { useRoute, useRouter } from 'vue-router'
 

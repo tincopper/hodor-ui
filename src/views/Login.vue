@@ -26,10 +26,13 @@
 import "../assets/css/reset.css";
 import "../assets/sass/common.css";
 import "../assets/sass/login.css";
+import { ElMessage } from "element-plus";
+
 import { apiFn, session } from "../assets/util.js";
 import * as loginApi from "../api/login.js";
 import { defineComponent, reactive, getCurrentInstance } from "vue";
 import { useRouter } from 'vue-router'
+
 const myMixin = {
   data: function () {
     return {
@@ -71,7 +74,6 @@ export default defineComponent({
     }
 
     const onSubmit = () => {
-      console.log('-------')
       if (!checkForm()) {
         return;
       }
@@ -80,13 +82,17 @@ export default defineComponent({
         password: form.password.trim()
       };
       apiFn()(loginApi, "login", param, proxy).then(res => {
-        router.replace("/");
-        session("activeIndex", "0_0");
-        // if (res && res.successful) {
-        //   this.$router.replace("/");
-        //   session("userInfo", res.data);
-        //   session("activeIndex", "0_0");
-        // }
+        if (res && res.successful) {
+          console.log('--------1111')
+          router.replace("/");
+          session("userInfo", res.data);
+          session("activeIndex", "0_0");
+        } else {
+          ElMessage({
+            type: "error",
+            message: "账号密码错误"
+          })
+        }
       });
     }
     return {
